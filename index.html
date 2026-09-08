@@ -280,6 +280,45 @@
   /* FIX TOTAL MEDIA PRINT */
   @media print {
     .mobile-pdf-hint { display:none !important; }
+    #printPaper,
+    #printPaper .doc-table,
+    #printPaper .doc-table td,
+    #printPaper .report-info td,
+    #printPaper .report-people td,
+    #printPaper .report-signatures td,
+    #printPaper .device-report,
+    #printPaper .device-meta,
+    #printPaper .device-meta-item,
+    #printPaper .condition-table td {
+      background:#FFFFFF !important;
+      color:#111111 !important;
+      color-scheme:only light !important;
+      forced-color-adjust:none !important;
+    }
+    #printPaper .doc-label,
+    #printPaper .condition-label,
+    #printPaper .device-meta-label { color:#33434A !important; }
+    #printPaper .doc-value,
+    #printPaper .condition-value,
+    #printPaper .device-meta-value { color:#111111 !important; }
+    #printPaper .doc-title,
+    #printPaper .doc-table th,
+    #printPaper .device-report-head {
+      background:#173B43 !important;
+      color:#FFFFFF !important;
+    }
+    #printPaper .condition-table .phase-head th:first-child {
+      background:#39756D !important;
+      color:#FFFFFF !important;
+    }
+    #printPaper .condition-table .phase-head th + th {
+      background:#6B7F57 !important;
+      color:#FFFFFF !important;
+    }
+    #printPaper .doc-section-h {
+      background:#EAF0F0 !important;
+      color:#173B43 !important;
+    }
     :root, html, body {
       color-scheme: light !important;
       forced-color-adjust: none !important;
