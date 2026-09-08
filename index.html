@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0d1116">
-<title>Daily Work Log &amp; Activity Report</title>
+<title>Form Aktivitas Pekerjaan</title>
 <style>
   :root{
     --bg:#0d1116;
@@ -143,20 +143,21 @@
   }
   .actionbar .btn-block{width:auto;}.actionbar .spacer{flex:1;}
   @media (max-width:720px){
-    body{padding-bottom:calc(92px + env(safe-area-inset-bottom));}
-    .topbar{padding:12px 16px;padding-top:calc(12px + env(safe-area-inset-top));}
-    .topbar h1{max-width:calc(100vw - 170px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-    .topbar-actions .status-pill{display:none}.topbar-actions .btn{white-space:nowrap;padding:9px 11px;font-size:12px}
+    body{padding-bottom:calc(92px + env(safe-area-inset-bottom));overflow-x:hidden;}
+    .topbar{padding:12px 16px;padding-top:calc(12px + env(safe-area-inset-top));gap:10px;}
+    .topbar > div:nth-child(2){min-width:0;flex:1;}
+    .topbar h1{max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .topbar-actions{flex:0 0 auto;margin-left:auto;}.topbar-actions .status-pill{display:none}.topbar-actions .btn{white-space:nowrap;padding:9px 11px;font-size:12px}
     .wizard-layout{display:block}.stepper{position:relative;top:auto;display:flex;overflow-x:auto;padding:0 0 18px;gap:10px;scrollbar-width:none}.stepper::-webkit-scrollbar{display:none}.stepper:before{display:none}
     .step-item{min-width:145px;padding:0;gap:8px}.step-copy small{display:none}.report-meta{display:none}
-    .wrap{padding:20px 12px 110px}.wizard-main{margin-top:4px}.details.card{border-radius:10px}
+    .wrap{width:100%;padding:20px 12px 110px}.wizard-main{width:100%;margin-top:4px}.details.card{border-radius:10px}
     details.card > summary{padding:15px 16px}.panel-heading{padding:17px 16px 3px}.details.card .card-body{padding:4px 16px 20px}
-    .actionbar{padding:9px 12px calc(9px + env(safe-area-inset-bottom));gap:7px}.actionbar .btn{min-height:44px;padding:10px 11px;font-size:12px}.actionbar .btn-ghost{padding-left:6px;padding-right:6px}
-    #printActionBar{gap:5px}#printActionBar .btn{min-width:0;flex:1;padding-left:7px;padding-right:7px;font-size:11px;white-space:nowrap}
+    .actionbar{padding:9px 12px calc(9px + env(safe-area-inset-bottom));gap:7px}.actionbar .btn{min-height:44px;min-width:0;padding:10px 11px;font-size:12px}.actionbar .btn-ghost{padding-left:6px;padding-right:6px}
+    #printActionBar{gap:7px}#printActionBar .btn{min-width:0;flex:1;padding-left:8px;padding-right:8px;font-size:11px;white-space:nowrap}
   }
   @media (max-width:420px){
     .row2{grid-template-columns:1fr}.topbar .dot{width:24px;height:24px;flex-basis:24px}.topbar .dot:after{left:9px;top:9px}
-    .topbar h1{font-size:13px;max-width:calc(100vw - 145px)}.topbar .sub{font-size:9px}.topbar-actions .btn{font-size:11px;padding:8px 9px}
+    .topbar h1{font-size:13px}.topbar .sub{font-size:9px}.topbar-actions .btn{font-size:11px;padding:8px 9px}
     .step-item{min-width:132px}.step-number{width:23px;height:23px;flex-basis:23px}.step-copy strong{font-size:11px}
     .actionbar .spacer{display:none}.actionbar .btn:first-child{margin-right:auto}.actionbar .btn:not(:first-child){flex:1}
   }
@@ -170,7 +171,7 @@
   }
   body.showing-print #printPaper {
     max-width:210mm; margin:0 auto; background:#fff; color:#111C21;
-    box-shadow:0 2px 12px rgba(16,32,38,.16); color-scheme:only light; forced-color-adjust:none;
+    box-shadow:0 2px 12px rgba(16,32,38,.16); color-scheme:only light !important; forced-color-adjust:none;
   }
   body.showing-print #printPaper * { forced-color-adjust:none; }
   body.showing-print .topbar { display:none; }
@@ -187,6 +188,7 @@
   body.showing-print #printPaper .condition-table .phase-head th + th { background:#6B7F57; color:#fff; }
   body.showing-print #printPaper .doc-label { color:#52666B; }
   body.showing-print #printPaper .doc-value { color:#111C21; }
+  .mobile-pdf-hint { display:none; }
   @media (prefers-color-scheme: dark){
     body.showing-print, body.showing-print #printView, body.showing-print #printPaper,
     body.showing-print #printPaper .doc-table, body.showing-print #printPaper .doc-table td,
@@ -233,6 +235,29 @@
   .condition-value { display: block; font-size: 10.5px; }
   .condition-photo { width: auto; max-width: 145px; height: auto; max-height: 105px; display: block; margin: 6px auto 0; border: 1px solid #8A9B9E; object-fit: contain; }
   #printPaper { background: #fff; color: #000; padding: 14px; width: 100%; box-sizing: border-box; font-family: Arial, Helvetica, sans-serif; font-weight: 400; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body.showing-print #printPaper,
+  body.showing-print #printPaper .doc-table,
+  body.showing-print #printPaper .doc-table td,
+  body.showing-print #printPaper .device-meta,
+  body.showing-print #printPaper .device-meta-item,
+  body.showing-print #printPaper .condition-table td,
+  body.showing-print #printPaper .report-signatures td {
+    background-color:#F8FAF9 !important;
+    color:#111C21 !important;
+    color-scheme:only light !important;
+    forced-color-adjust:none !important;
+  }
+  body.showing-print #printPaper .doc-title,
+  body.showing-print #printPaper .doc-table th,
+  body.showing-print #printPaper .device-report-head {
+    background-color:#1B3A42 !important;
+    color:#FFFFFF !important;
+  }
+  body.showing-print #printPaper .condition-table .phase-head th:first-child { background-color:#39756D !important; color:#FFFFFF !important; }
+  body.showing-print #printPaper .condition-table .phase-head th + th { background-color:#6B7F57 !important; color:#FFFFFF !important; }
+  body.showing-print #printPaper .doc-section-h { background-color:#EAF0F0 !important; color:#1B3A42 !important; }
+  body.showing-print #printPaper .report-info td:nth-child(2),
+  body.showing-print #printPaper .report-people td:nth-child(2) { background-color:#F1F6F3 !important; }
 
   @media (max-width:720px){
     body.showing-print #printView{padding:8px 6px calc(82px + env(safe-area-inset-bottom));}
@@ -249,10 +274,12 @@
     body.showing-print .condition-photo{max-width:92px;max-height:72px;}
     body.showing-print .report-signatures{width:100%;margin-left:0;margin-right:0;}
     body.showing-print .signature-section{margin-left:0;margin-right:0;}
+    body.showing-print .mobile-pdf-hint{display:block;margin:0 0 8px;padding:9px 10px;border:1px solid #c7d5d8;border-radius:7px;background:#f8faf9;color:#52666b;font:11px/1.4 Arial,Helvetica,sans-serif;}
   }
 
   /* FIX TOTAL MEDIA PRINT */
   @media print {
+    .mobile-pdf-hint { display:none !important; }
     :root, html, body {
       color-scheme: light !important;
       forced-color-adjust: none !important;
@@ -406,12 +433,11 @@
 <div class="topbar">
   <div class="dot"></div>
   <div>
-    <h1>Daily Work Log &amp; Activity Report</h1>
+    <h1>Form Aktivitas Pekerjaan</h1>
     <div class="sub">Real-time Field Activity &amp; Reporting</div>
   </div>
   <div class="topbar-actions">
     <div class="status-pill">Draft · belum dikirim</div>
-    <button type="button" class="btn btn-sm" id="formShareBtn">↗ Bagikan link</button>
     <button type="button" class="btn btn-accent btn-sm" id="topSaveBtn">Simpan laporan</button>
   </div>
 </div>
@@ -554,7 +580,10 @@
  </div>
 </div>
 
-<div id="printView"><div id="printPaper"></div></div>
+<div id="printView">
+  <div class="mobile-pdf-hint">Pilih <strong>Simpan sebagai PDF</strong>, lalu buka file dari folder Download menggunakan WPS Office.</div>
+  <div id="printPaper"></div>
+</div>
 
 <div class="actionbar" id="formActionBar">
   <button class="btn btn-ghost" id="resetBtn">Reset form</button>
@@ -566,8 +595,7 @@
 
 <div class="actionbar" id="printActionBar" style="display:none;">
   <button class="btn btn-block" id="backBtn">← Kembali Edit</button>
-  <button class="btn btn-block" id="shareBtn">↗ Bagikan / Buka dengan</button>
-  <button class="btn btn-accent btn-block" id="printBtn">🖨 Cetak / Simpan PDF</button>
+  <button class="btn btn-accent btn-block" id="printBtn">⬇ Simpan PDF / WPS Office</button>
 </div>
 
 <script>
@@ -793,15 +821,22 @@
       loadImageFile(file){
         const reader = new FileReader();
         reader.onload = function(ev){
-          const img = new Image();
-          img.onload = function(){
-            resize();
-            ctx.drawImage(img, 10, 10, canvas.width/2, canvas.height/2);
-            hasDrawing = true;
-          };
-          img.src = ev.target.result;
+          sigCanvases[key].loadImageData(ev.target.result);
         };
         reader.readAsDataURL(file);
+      },
+      loadImageData(src){
+        if (!canvas.clientWidth || !canvas.clientHeight) {
+          requestAnimationFrame(() => sigCanvases[key].loadImageData(src));
+          return;
+        }
+        const img = new Image();
+        img.onload = function(){
+          resize();
+          ctx.drawImage(img, 10, 10, canvas.clientWidth - 20, canvas.clientHeight - 20);
+          hasDrawing = true;
+        };
+        img.src = src;
       }
     };
   }
@@ -865,14 +900,47 @@
     document.querySelectorAll("#formView input, #formView select, #formView textarea").forEach(field => {
       if (field.id) fields[field.id] = field.value;
     });
-    localStorage.setItem("activity-report-draft", JSON.stringify({ fields, steps, devices, savedAt: new Date().toISOString() }));
-    statusPill.textContent = "Draft · tersimpan";
-    statusPill.style.color = "#a2d3b0";
+    try {
+      const signatures = {};
+      Object.entries(sigCanvases).forEach(([key, signature]) => {
+        if (signature.hasDrawing) signatures[key] = signature.canvas.toDataURL("image/png");
+      });
+      localStorage.setItem("activity-report-draft", JSON.stringify({ fields, steps, devices, signatures, savedAt: new Date().toISOString() }));
+      statusPill.textContent = "Draft · tersimpan";
+      statusPill.style.color = "#a2d3b0";
+    } catch (error) {
+      alert("Draft tidak dapat disimpan. Penyimpanan browser mungkin penuh.");
+    }
   }
   document.getElementById("topSaveBtn").addEventListener("click", saveDraft);
 
+  function restoreDraft(){
+    try {
+      const saved = JSON.parse(localStorage.getItem("activity-report-draft") || "null");
+      if (!saved) return;
+      Object.entries(saved.fields || {}).forEach(([id, value]) => {
+        const field = document.getElementById(id);
+        if (field) field.value = value;
+      });
+      if (Array.isArray(saved.steps)) steps = saved.steps;
+      if (Array.isArray(saved.devices)) devices = saved.devices;
+      renderSteps();
+      renderDevices();
+      Object.entries(saved.signatures || {}).forEach(([key, image]) => {
+        if (sigCanvases[key]) sigCanvases[key].loadImageData(image);
+      });
+      statusPill.textContent = "Draft · dipulihkan";
+      statusPill.style.color = "#a2d3b0";
+    } catch (error) {
+      localStorage.removeItem("activity-report-draft");
+    }
+  }
+
   document.getElementById("resetBtn").addEventListener("click", () => {
-    if (confirm("Kosongkan semua isian form?")) location.reload();
+    if (confirm("Kosongkan semua isian form?")) {
+      localStorage.removeItem("activity-report-draft");
+      location.reload();
+    }
   });
 
   function val(id){ return document.getElementById(id).value.trim() || "-"; }
@@ -926,7 +994,7 @@
     });
 
     const html = `
-      <div class="doc-title">DAILY WORK LOG &amp; ACTIVITY REPORT</div>
+      <div class="doc-title" style="background:#1B3A42 !important;color:#FFFFFF !important;">FORM AKTIVITAS PEKERJAAN</div>
       <table class="doc-table report-info">
         <tr><td colspan="2">${reportField("Nomor Laporan :", val("f_nomorLaporan"))}</td></tr>
         <tr>
@@ -986,31 +1054,10 @@
 
   document.getElementById("printBtn").addEventListener("click", () => window.print());
 
-  async function shareFormLink(){
-    const shareData = {
-      title: "Form Aktivitas Pekerjaan",
-      text: "Form Aktivitas Pekerjaan",
-      url: window.location.href
-    };
-    if (navigator.share) {
-      try { await navigator.share(shareData); } catch (error) {
-        if (error.name !== "AbortError") alert("Menu berbagi tidak dapat dibuka.");
-      }
-      return;
-    }
-    try {
-      await navigator.clipboard.writeText(window.location.href);
-      alert("Link form sudah disalin. Silakan buka menggunakan aplikasi yang diinginkan.");
-    } catch (error) {
-      alert(window.location.href);
-    }
-  }
-  document.getElementById("shareBtn").addEventListener("click", shareFormLink);
-  document.getElementById("formShareBtn").addEventListener("click", shareFormLink);
-
   addStep("");
   addDevice("-");
   renderSignatures();
+  restoreDraft();
   setStep(1, false);
 })();
 </script>
