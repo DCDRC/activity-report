@@ -411,6 +411,7 @@
   </div>
   <div class="topbar-actions">
     <div class="status-pill">Draft · belum dikirim</div>
+    <button type="button" class="btn btn-sm" id="formShareBtn">↗ Bagikan link</button>
     <button type="button" class="btn btn-accent btn-sm" id="topSaveBtn">Simpan laporan</button>
   </div>
 </div>
@@ -985,7 +986,7 @@
 
   document.getElementById("printBtn").addEventListener("click", () => window.print());
 
-  document.getElementById("shareBtn").addEventListener("click", async () => {
+  async function shareFormLink(){
     const shareData = {
       title: "Form Aktivitas Pekerjaan",
       text: "Form Aktivitas Pekerjaan",
@@ -1003,7 +1004,9 @@
     } catch (error) {
       alert(window.location.href);
     }
-  });
+  }
+  document.getElementById("shareBtn").addEventListener("click", shareFormLink);
+  document.getElementById("formShareBtn").addEventListener("click", shareFormLink);
 
   addStep("");
   addDevice("-");
