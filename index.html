@@ -1068,7 +1068,33 @@
         <tr>${sigHTML.map(s => `<td>${reportField("Nama :", s.nama)}<br>${reportField("Jabatan :", s.jab)}</td>`).join("")}</tr>
       </table>
     `;
-    document.getElementById("printPaper").innerHTML = html;
+    const printPaper = document.getElementById("printPaper");
+    printPaper.innerHTML = html;
+    printPaper.style.setProperty("background-color", "#ffffff", "important");
+    printPaper.style.setProperty("color", "#111111", "important");
+    printPaper.style.setProperty("color-scheme", "only light", "important");
+    printPaper.style.setProperty("forced-color-adjust", "none", "important");
+    printPaper.querySelectorAll(".doc-table, .doc-table td, .report-info td, .report-people td, .report-signatures td, .device-report, .device-meta, .device-meta-item, .condition-table td").forEach(element => {
+      element.style.setProperty("background-color", "#ffffff", "important");
+      element.style.setProperty("color", "#111111", "important");
+      element.style.setProperty("forced-color-adjust", "none", "important");
+    });
+    printPaper.querySelectorAll(".doc-title, .doc-table th, .device-report-head").forEach(element => {
+      element.style.setProperty("background-color", "#173b43", "important");
+      element.style.setProperty("color", "#ffffff", "important");
+    });
+    printPaper.querySelectorAll(".condition-table .phase-head th:first-child").forEach(element => {
+      element.style.setProperty("background-color", "#39756d", "important");
+      element.style.setProperty("color", "#ffffff", "important");
+    });
+    printPaper.querySelectorAll(".condition-table .phase-head th + th").forEach(element => {
+      element.style.setProperty("background-color", "#6b7f57", "important");
+      element.style.setProperty("color", "#ffffff", "important");
+    });
+    printPaper.querySelectorAll(".doc-section-h").forEach(element => {
+      element.style.setProperty("background-color", "#eaf0f0", "important");
+      element.style.setProperty("color", "#173b43", "important");
+    });
   }
 
   generateBtn.addEventListener("click", () => {
