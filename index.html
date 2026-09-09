@@ -123,6 +123,7 @@
     display:flex;align-items:center;justify-content:center;color:var(--text-dim);font-size:10px;text-align:center;
   }
   .file-btn{position:relative;overflow:hidden;}
+  .media-icon{font-family:"Segoe UI Emoji","Apple Color Emoji","Noto Color Emoji",sans-serif;font-size:16px;line-height:1;}
   .file-btn input[type=file]{
     position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;
   }
@@ -185,7 +186,7 @@
   body.showing-print #printPaper .device-report-head,
   body.showing-print #printPaper .doc-title { background:#1B3A42; color:#fff; }
   body.showing-print #printPaper .condition-table .phase-head th:first-child { background:#39756D; color:#fff; }
-  body.showing-print #printPaper .condition-table .phase-head th + th { background:#6B7F57; color:#fff; }
+  body.showing-print #printPaper .condition-table .phase-head th + th { background:#557451; color:#fff; }
   body.showing-print #printPaper .doc-label { color:#52666B; }
   body.showing-print #printPaper .doc-value { color:#111C21; }
   .mobile-pdf-hint { display:none; }
@@ -214,7 +215,7 @@
   .signature-section { margin-left: 0; margin-right: 0; }
   .report-signatures { width: 100%; margin-left: 0; margin-right: 0; }
   .doc-img { max-width: 260px; max-height: 190px; display: block; margin: 6px auto 2px; border: 1px solid #999; }
-  .doc-sig-img { max-width: 130px; max-height: 85px; display: block; margin: 4px auto; }
+  .doc-sig-img { width: 130px; height: 70px; object-fit: contain; display: block; margin: 4px auto; }
   .doc-empty { color: #000; margin: 4px 0 10px; }
   .device-report { margin: 14px 0 18px; border: 1px solid #1B3A42; break-inside: auto; page-break-inside: auto; }
   .device-report-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 8px 10px; background: #1B3A42; color: #fff; }
@@ -228,10 +229,10 @@
   .condition-table { width: 100%; table-layout: fixed; border-collapse: collapse; }
   .condition-table thead { display: table-header-group; }
   .condition-table tbody { display: table-row-group; }
-  .condition-table td { width: 50%; padding: 8px 10px; vertical-align: top; font-size: 10.5px; border-left: 1px solid #C8D2D4; border-bottom: 1px solid #C8D2D4; }
-  .condition-table .phase-head th { width: 50%; color: #fff; background: #39756D; text-align: center; font-size: 10.5px; letter-spacing: .03em; }
-  .condition-table .phase-head th + th { background: #6B7F57; }
-  .condition-label { display: block; color: #1B3A42; font-size: 9px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; margin-bottom: 3px; }
+  .condition-table td { width: 50%; padding: 8px 10px; vertical-align: top; font-size: 10.5px; border: 1px solid #B7C8CB; }
+  .condition-table .phase-head th { width: 50%; color: #fff; background: #39756D; border: 1px solid #B7C8CB; text-align: center; font-size: 10.5px; letter-spacing: .03em; }
+  .condition-table .phase-head th + th { background: #557451; }
+  .condition-label { display: block; color: #1B3A42; font-size: 9px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; margin-bottom: 6px; }
   .condition-value { display: block; font-size: 10.5px; }
   .condition-photo { width: auto; max-width: 145px; height: auto; max-height: 105px; display: block; margin: 6px auto 0; border: 1px solid #8A9B9E; object-fit: contain; }
   #printPaper { background: #fff; color: #000; padding: 14px; width: 100%; box-sizing: border-box; font-family: Arial, Helvetica, sans-serif; font-weight: 400; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
@@ -254,7 +255,7 @@
     color:#FFFFFF !important;
   }
   body.showing-print #printPaper .condition-table .phase-head th:first-child { background-color:#39756D !important; color:#FFFFFF !important; }
-  body.showing-print #printPaper .condition-table .phase-head th + th { background-color:#6B7F57 !important; color:#FFFFFF !important; }
+  body.showing-print #printPaper .condition-table .phase-head th + th { background-color:#557451 !important; color:#FFFFFF !important; }
   body.showing-print #printPaper .doc-section-h { background-color:#EAF0F0 !important; color:#1B3A42 !important; }
   body.showing-print #printPaper .report-info td:nth-child(2),
   body.showing-print #printPaper .report-people td:nth-child(2) { background-color:#F1F6F3 !important; }
@@ -273,6 +274,7 @@
     body.showing-print .condition-table td{padding:5px 6px;font-size:9px;}.condition-label{font-size:7.5px;}.condition-value{font-size:9px;}
     body.showing-print .condition-photo{max-width:92px;max-height:72px;}
     body.showing-print .report-signatures{width:100%;margin-left:0;margin-right:0;}
+    body.showing-print .doc-sig-img{width:92px;height:62px;}
     body.showing-print .signature-section{margin-left:0;margin-right:0;}
     body.showing-print .mobile-pdf-hint{display:block;margin:0 0 8px;padding:9px 10px;border:1px solid #c7d5d8;border-radius:7px;background:#f8faf9;color:#52666b;font:11px/1.4 Arial,Helvetica,sans-serif;}
   }
@@ -312,7 +314,7 @@
       color:#FFFFFF !important;
     }
     #printPaper .condition-table .phase-head th + th {
-      background:#6B7F57 !important;
+      background:#557451 !important;
       color:#FFFFFF !important;
     }
     #printPaper .doc-section-h {
@@ -412,7 +414,7 @@
       background: #39756D !important;
     }
     #printPaper .condition-table .phase-head th + th {
-      background: #6B7F57 !important;
+      background: #557451 !important;
     }
 
     /* Mencegah pemotongan tabel di tengah baris */
@@ -465,6 +467,91 @@
 
   .hint{font-size:12px;color:var(--text-dim);line-height:1.5;margin:4px 0 0;}
   .empty-state{color:var(--text-dim);font-size:13px;padding:14px;text-align:center;border:1px dashed var(--border);border-radius:10px;}
+
+  /* ===== EDIT FORM THEME ===== */
+  :root{
+    --bg:#061426;
+    --surface:#091b31;
+    --surface-2:#102b49;
+    --border:#214466;
+    --text:#f2f7ff;
+    --text-dim:#9db2ca;
+    --accent:#1d8cff;
+    --accent-soft:#123962;
+    --line:#1d4168;
+    --danger:#ff8a8a;
+    --shadow:0 16px 36px rgba(0,8,24,.24);
+  }
+  html,body{background-color:var(--bg);}
+  body{background-image:linear-gradient(125deg,rgba(29,140,255,.08),transparent 42%),linear-gradient(rgba(92,150,206,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(92,150,206,.035) 1px,transparent 1px);background-size:auto,64px 64px,64px 64px;}
+  input,select,textarea{background:#102945;border-color:#274c73;border-radius:7px;min-height:42px;padding:11px 13px;}
+  input::placeholder,textarea::placeholder{color:#7893b0;}
+  input:focus,select:focus,textarea:focus{border-color:#3da2ff;background:#143456;box-shadow:0 0 0 3px rgba(29,140,255,.16);}
+  label.field-label{font-size:10px;color:#c1d0e1;margin:14px 0 6px;letter-spacing:.03em;text-transform:none;}
+  .topbar{min-height:80px;background:rgba(4,15,30,.94);border-bottom:1px solid rgba(54,133,204,.42);padding:14px max(24px,calc((100vw - 1240px) / 2));box-shadow:0 10px 30px rgba(0,8,24,.18);}
+  .topbar > div:nth-child(2){display:flex;flex-direction:column;justify-content:center;gap:3px;}
+  .topbar .dot{width:36px;height:36px;flex-basis:36px;border-radius:11px;background:linear-gradient(145deg,#12385f,#0b213d);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 0 0 1px #2c6594,0 7px 18px rgba(11,111,210,.2);}
+  .topbar .dot:before{content:"";position:absolute;width:13px;height:16px;left:11px;top:11px;border:1.7px solid #fff;border-radius:2px;background:transparent;}
+  .topbar .dot:after{content:"";width:8px;height:4px;left:13.5px;top:8px;border:1.7px solid #fff;border-radius:3px;background:#1677ee;box-shadow:0 0 0 1px #1677ee;}
+  .topbar h1{font-size:17px;letter-spacing:-.02em;color:#f4f8ff;line-height:1.1;}
+  .topbar .sub{font-size:11px;color:#88a8c8;letter-spacing:.06em;}
+  .status-pill{border-color:#24496d;color:#9db2ca;}
+  .status-pill:before{background:#2d96ff;}
+  .wrap{max-width:1240px;padding:26px 18px 108px;}
+  .wizard-layout{display:block;}
+  .stepper{position:relative;top:auto;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;padding:0 2.2% 25px;--step-progress:0%;}
+  .stepper:before{left:2.2%;right:2.2%;top:18px;bottom:auto;width:auto;height:2px;background:linear-gradient(90deg,#238ff4 0 var(--step-progress),#173b62 var(--step-progress) 100%);transition:background .25s ease;}
+  .step-item{z-index:1;display:flex;align-items:flex-start;gap:10px;padding:0;color:#7290ae;min-width:0;}
+  .step-copy{min-width:0;overflow:hidden;}
+  .step-number{width:36px;height:36px;flex-basis:36px;border-radius:50%;background:#0b2038;border-color:#315474;font-size:12px;}
+  .step-copy strong{font-size:12px;color:inherit;margin:2px 0 3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .step-copy small{font-size:10px;color:#7895b4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block;}
+  .step-item.active{color:var(--text);}.step-item.active .step-number{background:#197fe8;border-color:#4aa8ff;color:#fff;box-shadow:0 0 0 4px rgba(29,140,255,.13);}.step-item.active .step-copy strong{color:var(--text);}
+  .step-item.done .step-number{background:#123b68;border-color:#2d8ce8;color:#d6eaff;}
+  .report-meta{display:none;}
+  .wizard-main{width:100%;}
+  details.card{background:rgba(8,27,49,.92);border-color:#214667;border-radius:8px;box-shadow:0 14px 32px rgba(0,7,20,.18);}
+  details.card > summary{padding:17px 20px;border-bottom:1px solid #173a60;font-size:14px;}
+  details.card .card-body{padding:4px 20px 24px;border-top:0;}
+  .panel-heading{padding:17px 20px 3px;}
+  .panel-heading .eyebrow{color:#60b3ff;}.panel-heading .counter{color:#7895b4;}
+  .row2{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;}
+  .date-time-pair{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.85fr);gap:8px;}
+  .date-time-pair input{min-width:0;}
+  .date-time-field{min-width:0;}
+  .date-time-field span{display:block;margin:0 0 4px 2px;color:var(--text-dim);font-size:9px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;}
+  .btn{background:#112d49;border-color:#275174;border-radius:8px;min-height:40px;}
+  .btn:hover{border-color:#3c79a9;box-shadow:0 8px 20px rgba(0,20,50,.3);}
+  .btn-accent{background:#1b83ee;border-color:#3198ff;color:#fff;box-shadow:0 7px 18px rgba(22,123,231,.25);}
+  .btn-ghost{background:transparent;}
+  .btn-danger{background:#302334;border-color:#69414d;color:#ff9a9a;}
+  .device{background:#0d2741;border-color:#214667;}
+  .cond-row{background:#0b2035;border-color:#214667;}
+  .phase-title{color:#64b5ff;}
+  .actionbar{background:rgba(5,17,34,.96);border-top-color:#17395e;padding-left:max(16px,calc((100vw - 1240px) / 2));padding-right:max(16px,calc((100vw - 1240px) / 2));}
+
+  @media (max-width:720px){
+    .topbar{padding-left:14px;padding-right:14px;}
+    .wrap{padding:18px 10px 108px;}
+    .stepper{display:flex;overflow-x:auto;gap:8px;padding:0 0 20px;scrollbar-width:none;}
+    .stepper::-webkit-scrollbar{display:none;}
+    .stepper:before{display:none;}
+    .step-item{min-width:170px;padding:0 2px;}
+    .step-number{width:27px;height:27px;flex-basis:27px;font-size:11px;}
+    .stepper:before{display:none;}
+    .step-copy small{display:block;}
+    details.card > summary{padding:15px 16px;}
+    details.card .card-body{padding:4px 16px 20px;}
+    .panel-heading{padding:16px 16px 3px;}
+    .row2{grid-template-columns:1fr;gap:0;}
+    .actionbar{padding-left:10px;padding-right:10px;}
+  }
+  @media (min-width:721px){
+    [data-step-panel="1"] .card-body > label.field-label:nth-of-type(1) + input,
+    [data-step-panel="1"] .card-body > label.field-label:nth-of-type(6) + input,
+    [data-step-panel="1"] .card-body > label.field-label:nth-of-type(7) + select,
+    [data-step-panel="1"] .card-body > label.field-label:nth-of-type(8) + input{max-width:100%;}
+  }
 </style>
 </head>
 <body>
@@ -476,7 +563,6 @@
     <div class="sub">Real-time Field Activity &amp; Reporting</div>
   </div>
   <div class="topbar-actions">
-    <div class="status-pill">Draft · belum dikirim</div>
     <button type="button" class="btn btn-accent btn-sm" id="topSaveBtn">Simpan laporan</button>
   </div>
 </div>
@@ -485,10 +571,10 @@
  <div class="wizard-layout">
   <aside class="stepper" aria-label="Tahapan laporan">
     <div class="step-item active" data-go-step="1" tabindex="0">
-      <span class="step-number">1</span><span class="step-copy"><strong>Informasi laporan</strong><small>Data tiket, kontrak, lokasi &amp; perangkat</small></span>
+      <span class="step-number">1</span><span class="step-copy"><strong>Informasi Laporan</strong><small>Data utama laporan</small></span>
     </div>
     <div class="step-item" data-go-step="2" tabindex="0">
-      <span class="step-number">2</span><span class="step-copy"><strong>Tahapan pekerjaan</strong><small>Rincian aktivitas per tahap</small></span>
+      <span class="step-number">2</span><span class="step-copy"><strong>Tahapan Pekerjaan</strong><small>Rincian aktivitas per tahap</small></span>
     </div>
     <div class="step-item" data-go-step="3" tabindex="0">
       <span class="step-number">3</span><span class="step-copy"><strong>Dokumentasi</strong><small>Foto before / after &amp; catatan</small></span>
@@ -520,11 +606,17 @@
       <div class="row2">
         <div>
           <label class="field-label">Tanggal Mulai</label>
-          <input id="f_tglMulai" type="date">
+          <div class="date-time-pair">
+            <div class="date-time-field"><span>Tanggal</span><input id="f_tglMulai" type="date" aria-label="Tanggal Mulai"></div>
+            <div class="date-time-field"><span>Jam</span><input id="f_jamMulai" type="time" aria-label="Jam Mulai"></div>
+          </div>
         </div>
         <div>
           <label class="field-label">Tanggal Selesai</label>
-          <input id="f_tglSelesai" type="date">
+          <div class="date-time-pair">
+            <div class="date-time-field"><span>Tanggal</span><input id="f_tglSelesai" type="date" aria-label="Tanggal Selesai"></div>
+            <div class="date-time-field"><span>Jam</span><input id="f_jamSelesai" type="time" aria-label="Jam Selesai"></div>
+          </div>
         </div>
       </div>
 
@@ -539,17 +631,22 @@
         </div>
       </div>
 
-      <label class="field-label">Rack / U</label>
-      <input id="f_rackU" placeholder="-">
-
-      <label class="field-label">Jenis Perangkat</label>
-      <select id="f_jenisPerangkat">
-        <option value="">-</option>
-        <option>Server</option>
-        <option>Storage</option>
-        <option>Network</option>
-        <option>Security</option>
-      </select>
+      <div class="row2">
+        <div>
+          <label class="field-label">Rack / U</label>
+          <input id="f_rackU" placeholder="-">
+        </div>
+        <div>
+          <label class="field-label">Jenis Perangkat</label>
+          <select id="f_jenisPerangkat">
+            <option value="">-</option>
+            <option>Server</option>
+            <option>Storage</option>
+            <option>Network</option>
+            <option>Security</option>
+          </select>
+        </div>
+      </div>
 
       <label class="field-label">Nama Pekerjaan</label>
       <input id="f_namaPekerjaan" placeholder="-">
@@ -578,23 +675,36 @@
     <summary>Internal &amp; Vendor Pelaksana <span class="chev">▶</span></summary>
     <div class="panel-heading"><span class="eyebrow">Langkah 2 dari 4</span><span class="counter">Tim pelaksana</span></div>
     <div class="card-body">
-      <label class="field-label">PIC Kegiatan (Nama &amp; Unit Kerja)</label>
-      <input id="f_picKegiatan" placeholder="-">
-
-      <label class="field-label">Personel Pendamping</label>
-      <input id="f_personelPendamping" placeholder="-">
-
-      <label class="field-label">Team Leader (Nama &amp; Unit Kerja)</label>
-      <input id="f_teamLeader" placeholder="-">
-
-      <label class="field-label">Nama Vendor / Principal</label>
-      <input id="f_namaVendor" placeholder="-">
-
-      <label class="field-label">Nama Teknisi</label>
-      <input id="f_namaTeknisi" placeholder="-">
-
-      <label class="field-label">Supervisor</label>
-      <input id="f_supervisor" placeholder="-">
+      <div class="row2">
+        <div>
+          <label class="field-label">PIC Kegiatan (Nama &amp; Unit Kerja)</label>
+          <input id="f_picKegiatan" placeholder="-">
+        </div>
+        <div>
+          <label class="field-label">Nama Vendor / Principal</label>
+          <input id="f_namaVendor" placeholder="-">
+        </div>
+      </div>
+      <div class="row2">
+        <div>
+          <label class="field-label">Personel Pendamping</label>
+          <input id="f_personelPendamping" placeholder="-">
+        </div>
+        <div>
+          <label class="field-label">Nama Engineer</label>
+          <input id="f_namaTeknisi" placeholder="-">
+        </div>
+      </div>
+      <div class="row2">
+        <div>
+          <label class="field-label">Team Leader (Nama &amp; Unit Kerja)</label>
+          <input id="f_teamLeader" placeholder="-">
+        </div>
+        <div>
+          <label class="field-label">Supervisor</label>
+          <input id="f_supervisor" placeholder="-">
+        </div>
+      </div>
     </div>
   </details>
 
@@ -620,7 +730,7 @@
 </div>
 
 <div id="printView">
-  <div class="mobile-pdf-hint">Pilih <strong>Simpan sebagai PDF</strong>, lalu buka file dari folder Download menggunakan WPS Office.</div>
+  <div class="mobile-pdf-hint">Pilih <strong>Simpan sebagai PDF</strong>, lalu buka file dari folder Download.</div>
   <div id="printPaper"></div>
 </div>
 
@@ -634,7 +744,7 @@
 
 <div class="actionbar" id="printActionBar" style="display:none;">
   <button class="btn btn-block" id="backBtn">← Kembali Edit</button>
-  <button class="btn btn-accent btn-block" id="printBtn">⬇ Simpan PDF / WPS Office</button>
+  <button class="btn btn-accent btn-block" id="printBtn">⬇ Simpan PDF</button>
 </div>
 
 <script>
@@ -660,6 +770,33 @@
 
   function uid(prefix){ return prefix + "_" + (Date.now().toString(36)) + Math.random().toString(36).slice(2,6); }
   function esc(s){ return (s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+
+  function readImageFile(file){
+    return new Promise((resolve, reject) => {
+      if (!file || (file.type && !file.type.startsWith("image/"))) {
+        reject(new Error("File bukan gambar yang didukung."));
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onerror = () => reject(new Error("File gambar tidak dapat dibaca."));
+      reader.onload = () => {
+        const image = new Image();
+        image.onload = () => {
+          const maxSize = 1600;
+          const scale = Math.min(1, maxSize / Math.max(image.naturalWidth, image.naturalHeight));
+          const canvas = document.createElement("canvas");
+          canvas.width = Math.max(1, Math.round(image.naturalWidth * scale));
+          canvas.height = Math.max(1, Math.round(image.naturalHeight * scale));
+          canvas.getContext("2d").drawImage(image, 0, 0, canvas.width, canvas.height);
+          resolve(canvas.toDataURL("image/jpeg", .84));
+        };
+        image.onerror = () => reject(new Error("Format gambar tidak dapat ditampilkan browser."));
+        image.src = reader.result;
+      };
+      reader.readAsDataURL(file);
+    });
+  }
 
   function addStep(text){ steps.push({ id: uid("step"), text: text || "" }); renderSteps(); }
   function renderSteps(){
@@ -692,6 +829,25 @@
     CONDS.forEach(c => { o[c.key] = ""; o[c.key + "Img"] = null; });
     return o;
   }
+  function normalizeCondition(data){
+    const normalized = blankCond();
+    if (!data || typeof data !== "object") return normalized;
+    CONDS.forEach(c => {
+      if (typeof data[c.key] === "string") normalized[c.key] = data[c.key];
+      if (typeof data[c.key + "Img"] === "string") normalized[c.key + "Img"] = data[c.key + "Img"];
+    });
+    return normalized;
+  }
+  function normalizeDevice(data){
+    return {
+      id: typeof data?.id === "string" ? data.id : uid("dev"),
+      nama: typeof data?.nama === "string" ? data.nama : "-",
+      sn: typeof data?.sn === "string" ? data.sn : "",
+      rack: typeof data?.rack === "string" ? data.rack : "",
+      before: normalizeCondition(data?.before),
+      after: normalizeCondition(data?.after)
+    };
+  }
   function addDevice(nama){
     devices.push({ id: uid("dev"), nama: nama || "-", sn: "", rack: "", before: blankCond(), after: blankCond() });
     renderDevices();
@@ -707,10 +863,10 @@
         <input type="text" data-role="cond-text" value="${esc(val)}" placeholder="-">
         <div class="photo-row">
           ${img ? `<img class="thumb" src="${img}">` : `<div class="thumb-placeholder">Belum ada foto</div>`}
-          <div class="btn btn-sm file-btn">📷 Kamera
+          <div class="btn btn-sm file-btn"><span class="media-icon" aria-hidden="true">📷️</span> Kamera
             <input type="file" accept="image/*" capture="environment" data-role="cond-file">
           </div>
-          <div class="btn btn-sm file-btn">🖼 Galeri
+          <div class="btn btn-sm file-btn"><span class="media-icon" aria-hidden="true">🖼️</span> Galeri
             <input type="file" accept="image/*" data-role="cond-file">
           </div>
           ${img ? `<button type="button" class="btn btn-sm btn-danger" data-role="cond-remove-img">Hapus</button>` : ``}
@@ -780,19 +936,22 @@
     }
   });
 
-  deviceListEl.addEventListener("change", (e) => {
+  deviceListEl.addEventListener("change", async (e) => {
     if (e.target.dataset.role !== "cond-file") return;
     const file = e.target.files[0];
     if (!file) return;
     const devEl = e.target.closest("[data-dev]");
     const condEl = e.target.closest("[data-cond]");
     const d = devices.find(x => x.id === devEl.dataset.dev);
-    const reader = new FileReader();
-    reader.onload = function(ev){
-      d[condEl.dataset.phase][condEl.dataset.cond + "Img"] = ev.target.result;
+    if (!d || !condEl) return;
+    try {
+      const imageData = await readImageFile(file);
+      d[condEl.dataset.phase][condEl.dataset.cond + "Img"] = imageData;
       renderDevices();
-    };
-    reader.readAsDataURL(file);
+    } catch (error) {
+      alert(error.message || "Foto tidak dapat dimuat. Pilih file gambar lain.");
+      e.target.value = "";
+    }
   });
 
   document.getElementById("addDeviceBtn").addEventListener("click", () => addDevice());
@@ -803,7 +962,7 @@
         <label class="field-label">${r.label}</label>
         <canvas class="sigpad" id="canvas_${r.key}"></canvas>
         <div class="sig-actions">
-          <div class="btn btn-sm file-btn">🖼 Unggah TTD
+          <div class="btn btn-sm file-btn"><span class="media-icon" aria-hidden="true">🖼️</span> Unggah TTD
             <input type="file" accept="image/*" data-role="sig-file" data-key="${r.key}">
           </div>
           <button type="button" class="btn btn-sm" data-role="sig-clear" data-key="${r.key}">Bersihkan</button>
@@ -823,12 +982,23 @@
     const ctx = canvas.getContext("2d");
     let drawing = false, last = null, hasDrawing = false;
 
-    function resize(){
+    function resize(preserve = true){
       const rect = canvas.getBoundingClientRect();
       const ratio = window.devicePixelRatio || 1;
+      const previous = preserve && hasDrawing && canvas.width && canvas.height
+        ? document.createElement("canvas")
+        : null;
+      if (previous) {
+        previous.width = canvas.width;
+        previous.height = canvas.height;
+        previous.getContext("2d").drawImage(canvas, 0, 0);
+      }
       canvas.width = Math.round(rect.width * ratio);
       canvas.height = Math.round(rect.height * ratio);
       ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+      ctx.fillStyle = "#fff";
+      ctx.fillRect(0, 0, rect.width, rect.height);
+      if (previous) ctx.drawImage(previous, 0, 0, previous.width, previous.height, 0, 0, rect.width, rect.height);
       ctx.lineWidth = 2.4;
       ctx.lineCap = "round";
       ctx.strokeStyle = "#000";
@@ -855,14 +1025,15 @@
 
     sigCanvases[key] = {
       canvas, get hasDrawing(){ return hasDrawing; },
-      clear(){ resize(); hasDrawing = false; },
+      clear(){ hasDrawing = false; resize(false); },
       resize,
-      loadImageFile(file){
-        const reader = new FileReader();
-        reader.onload = function(ev){
-          sigCanvases[key].loadImageData(ev.target.result);
-        };
-        reader.readAsDataURL(file);
+      async loadImageFile(file){
+        try {
+          const imageData = await readImageFile(file);
+          sigCanvases[key].loadImageData(imageData);
+        } catch (error) {
+          alert(error.message || "Tanda tangan tidak dapat dimuat. Pilih file gambar lain.");
+        }
       },
       loadImageData(src){
         if (!canvas.clientWidth || !canvas.clientHeight) {
@@ -871,7 +1042,7 @@
         }
         const img = new Image();
         img.onload = function(){
-          resize();
+          resize(false);
           ctx.drawImage(img, 10, 10, canvas.clientWidth - 20, canvas.clientHeight - 20);
           hasDrawing = true;
         };
@@ -896,7 +1067,7 @@
   const prevStepBtn = document.getElementById("prevStepBtn");
   const nextStepBtn = document.getElementById("nextStepBtn");
   const generateBtn = document.getElementById("generateBtn");
-  const statusPill = document.querySelector(".status-pill");
+  const stepperEl = document.querySelector(".stepper");
 
   function validateStep(step){
     return true;
@@ -905,6 +1076,7 @@
   function setStep(step, validateCurrent){
     if (validateCurrent && !validateStep(currentStep)) return;
     currentStep = Math.max(1, Math.min(4, step));
+    stepperEl.style.setProperty("--step-progress", `${((currentStep - 1) / 3) * 100}%`);
     stepPanels.forEach(panel => {
       const isActive = Number(panel.dataset.stepPanel) === currentStep;
       panel.classList.toggle("active", isActive);
@@ -945,8 +1117,6 @@
         if (signature.hasDrawing) signatures[key] = signature.canvas.toDataURL("image/png");
       });
       localStorage.setItem("activity-report-draft", JSON.stringify({ fields, steps, devices, signatures, savedAt: new Date().toISOString() }));
-      statusPill.textContent = "Draft · tersimpan";
-      statusPill.style.color = "#a2d3b0";
     } catch (error) {
       alert("Draft tidak dapat disimpan. Penyimpanan browser mungkin penuh.");
     }
@@ -962,14 +1132,12 @@
         if (field) field.value = value;
       });
       if (Array.isArray(saved.steps)) steps = saved.steps;
-      if (Array.isArray(saved.devices)) devices = saved.devices;
+      if (Array.isArray(saved.devices)) devices = saved.devices.map(normalizeDevice);
       renderSteps();
       renderDevices();
       Object.entries(saved.signatures || {}).forEach(([key, image]) => {
         if (sigCanvases[key]) sigCanvases[key].loadImageData(image);
       });
-      statusPill.textContent = "Draft · dipulihkan";
-      statusPill.style.color = "#a2d3b0";
     } catch (error) {
       localStorage.removeItem("activity-report-draft");
     }
@@ -984,6 +1152,46 @@
 
   function val(id){ return document.getElementById(id).value.trim() || "-"; }
 
+  function normalizedSignatureData(canvas){
+    const ctx = canvas.getContext("2d");
+    const width = canvas.width;
+    const height = canvas.height;
+    const pixels = ctx.getImageData(0, 0, width, height).data;
+    let minX = width, minY = height, maxX = -1, maxY = -1;
+    for (let y = 0; y < height; y++) {
+      for (let x = 0; x < width; x++) {
+        const index = (y * width + x) * 4;
+        if (pixels[index] < 235 || pixels[index + 1] < 235 || pixels[index + 2] < 235) {
+          minX = Math.min(minX, x);
+          minY = Math.min(minY, y);
+          maxX = Math.max(maxX, x);
+          maxY = Math.max(maxY, y);
+        }
+      }
+    }
+    if (maxX < 0) return canvas.toDataURL("image/png");
+
+    const output = document.createElement("canvas");
+    output.width = 260;
+    output.height = 140;
+    const outputCtx = output.getContext("2d");
+    outputCtx.fillStyle = "#fff";
+    outputCtx.fillRect(0, 0, output.width, output.height);
+    const padding = 16;
+    const scale = Math.min(
+      (output.width - padding * 2) / (maxX - minX + 1),
+      (output.height - padding * 2) / (maxY - minY + 1)
+    );
+    const drawWidth = (maxX - minX + 1) * scale;
+    const drawHeight = (maxY - minY + 1) * scale;
+    outputCtx.drawImage(
+      canvas,
+      minX, minY, maxX - minX + 1, maxY - minY + 1,
+      (output.width - drawWidth) / 2, (output.height - drawHeight) / 2, drawWidth, drawHeight
+    );
+    return output.toDataURL("image/png");
+  }
+
   function buildPrintView(){
     const filledSteps = steps.filter(s => s.text.trim());
     const stepsHTML = filledSteps.length
@@ -995,7 +1203,7 @@
       `<span class="doc-label">${label}</span><span class="doc-value">${esc(value || "-")}</span>`;
     const personRows = [
       ["PIC Kegiatan", "f_picKegiatan", "Nama Vendor / Principal", "f_namaVendor"],
-      ["Personel Pendamping", "f_personelPendamping", "Nama Teknisi", "f_namaTeknisi"],
+      ["Personel Pendamping", "f_personelPendamping", "Nama Engineer", "f_namaTeknisi"],
       ["Team Leader", "f_teamLeader", "Supervisor", "f_supervisor"]
     ].map(([leftLabel, leftId, rightLabel, rightId]) =>
       `<tr>${personCell(leftLabel, leftId)}${personCell(rightLabel, rightId)}</tr>`
@@ -1004,7 +1212,7 @@
     const conditionCell = (phase, condition) => {
       const value = phase[condition.key] || "-";
       const image = phase[condition.key + "Img"];
-      return `<td><span class="condition-label">${esc(condition.label)}</span><span class="condition-value">${esc(value)}</span>${image ? `<img class="condition-photo" src="${image}" alt="${esc(condition.label)}">` : ""}</td>`;
+      return `<td><span class="condition-label">${esc(condition.label)}:</span><span class="condition-value">${esc(value)}</span>${image ? `<img class="condition-photo" src="${image}" alt="${esc(condition.label)}">` : ""}</td>`;
     };
 
     const deviceHTML = devices.length ? devices.map((d, i) => `
@@ -1024,7 +1232,7 @@
     `).join("") : `<div class="doc-empty">Belum ada perangkat.</div>`;
     const sigHTML = SIG_ROLES.map(r => {
       const c = sigCanvases[r.key];
-      const imgSrc = (c && c.hasDrawing) ? c.canvas.toDataURL("image/png") : null;
+      const imgSrc = (c && c.hasDrawing) ? normalizedSignatureData(c.canvas) : null;
       return {
         label: r.label, imgSrc,
         nama: document.getElementById("signame_"+r.key).value.trim() || "-",
@@ -1041,7 +1249,7 @@
           <td>${reportField("Nomor Kontrak :", val("f_nomorKontrak"))}</td>
         </tr>
         <tr>
-          <td>${reportField("Tanggal Mulai :", val("f_tglMulai"))}<br>${reportField("Tanggal Selesai :", val("f_tglSelesai"))}</td>
+          <td>${reportField("Tanggal Mulai :", val("f_tglMulai"))}<br>${reportField("Jam Mulai :", val("f_jamMulai"))}<br>${reportField("Tanggal Selesai :", val("f_tglSelesai"))}<br>${reportField("Jam Selesai :", val("f_jamSelesai"))}</td>
           <td>${reportField("Lokasi :", val("f_lokasi"))}<br>${reportField("Ruang :", val("f_ruang"))}<br>${reportField("Rack / U :", val("f_rackU"))}<br>${reportField("Jenis Perangkat :", document.getElementById("f_jenisPerangkat").value)}</td>
         </tr>
         <tr><td colspan="2">${reportField("Nama Pekerjaan :", val("f_namaPekerjaan"))}</td></tr>
@@ -1088,8 +1296,11 @@
       element.style.setProperty("color", "#ffffff", "important");
     });
     printPaper.querySelectorAll(".condition-table .phase-head th + th").forEach(element => {
-      element.style.setProperty("background-color", "#6b7f57", "important");
+      element.style.setProperty("background-color", "#557451", "important");
       element.style.setProperty("color", "#ffffff", "important");
+    });
+    printPaper.querySelectorAll(".condition-table th, .condition-table td").forEach(element => {
+      element.style.setProperty("border", "1px solid #B7C8CB", "important");
     });
     printPaper.querySelectorAll(".doc-section-h").forEach(element => {
       element.style.setProperty("background-color", "#eaf0f0", "important");
