@@ -747,6 +747,8 @@
   <button class="btn btn-accent btn-block" id="printBtn">⬇ Simpan PDF</button>
 </div>
 
+<!-- Mengubah HEIC/HEIF ke JPEG di perangkat pengguna sebelum ditampilkan. -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/heic2any/0.0.4/heic2any.min.js" integrity="sha512-VjmsArkf8Vv2yyvbXCyVxp+R3n4N2WyS1GEQ+YQxa7Hu0tx836WpY4nW9/T1W5JBmvuIsxkVH/DlHgp7NEMjDw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
 (function(){
   "use strict";
@@ -771,13 +773,31 @@
   function uid(prefix){ return prefix + "_" + (Date.now().toString(36)) + Math.random().toString(36).slice(2,6); }
   function esc(s){ return (s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
 
-  function readImageFile(file){
-    return new Promise((resolve, reject) => {
-      if (!file || (file.type && !file.type.startsWith("image/"))) {
-        reject(new Error("File bukan gambar yang didukung."));
-        return;
-      }
+  function isHeifFile(file){
+    return /image\/(heic|heif)(?:-sequence)?$/i.test(file.type || "") || /\.(heic|heif)$/i.test(file.name || "");
+  }
 
+  function isImageFile(file){
+    return !!file && (isHeifFile(file) || /^image\//i.test(file.type || ""));
+  }
+
+  async function readImageFile(file){
+    if (!isImageFile(file)) throw new Error("File bukan gambar yang didukung.");
+
+    let sourceFile = file;
+    if (isHeifFile(file)) {
+      if (typeof window.heic2any !== "function") {
+        throw new Error("Dukungan HEIC/HEIF belum siap. Periksa koneksi internet lalu coba lagi.");
+      }
+      try {
+        const converted = await window.heic2any({ blob: file, toType: "image/jpeg", quality: .92 });
+        sourceFile = Array.isArray(converted) ? converted[0] : converted;
+      } catch (error) {
+        throw new Error("File HEIC/HEIF tidak dapat dikonversi. Pilih file lain atau coba kembali.");
+      }
+    }
+
+    return new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.onerror = () => reject(new Error("File gambar tidak dapat dibaca."));
       reader.onload = () => {
@@ -794,7 +814,7 @@
         image.onerror = () => reject(new Error("Format gambar tidak dapat ditampilkan browser."));
         image.src = reader.result;
       };
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(sourceFile);
     });
   }
 
@@ -867,7 +887,7 @@
             <input type="file" accept="image/*" capture="environment" data-role="cond-file">
           </div>
           <div class="btn btn-sm file-btn"><span class="media-icon" aria-hidden="true">🖼️</span> Galeri
-            <input type="file" accept="image/*" data-role="cond-file">
+            <input type="file" accept="image/*,.heic,.heif,image/heic,image/heif" data-role="cond-file">
           </div>
           ${img ? `<button type="button" class="btn btn-sm btn-danger" data-role="cond-remove-img">Hapus</button>` : ``}
         </div>
@@ -963,7 +983,7 @@
         <canvas class="sigpad" id="canvas_${r.key}"></canvas>
         <div class="sig-actions">
           <div class="btn btn-sm file-btn"><span class="media-icon" aria-hidden="true">🖼️</span> Unggah TTD
-            <input type="file" accept="image/*" data-role="sig-file" data-key="${r.key}">
+            <input type="file" accept="image/*,.heic,.heif,image/heic,image/heif,image/heic-sequence,image/heif-sequence" data-role="sig-file" data-key="${r.key}">
           </div>
           <button type="button" class="btn btn-sm" data-role="sig-clear" data-key="${r.key}">Bersihkan</button>
         </div>
