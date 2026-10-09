@@ -114,10 +114,13 @@
   }
   .cond-row label.field-label{margin-top:0;}
   .photo-row{display:flex;align-items:center;gap:10px;margin-top:8px;flex-wrap:wrap;}
+  .photo-gallery{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+  .photo-item{position:relative;width:64px;height:64px;}
   .thumb{
     width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid var(--border);
     background:#000;
   }
+  .photo-remove{position:absolute;top:-6px;right:-6px;width:22px;height:22px;padding:0;border:1px solid var(--border);border-radius:50%;background:#2a2025;color:var(--danger);font-size:14px;line-height:1;cursor:pointer;}
   .thumb-placeholder{
     width:64px;height:64px;border-radius:8px;border:1px dashed var(--border);
     display:flex;align-items:center;justify-content:center;color:var(--text-dim);font-size:10px;text-align:center;
@@ -854,7 +857,7 @@
 
   function blankCond(){
     const o = {};
-    CONDS.forEach(c => { o[c.key] = ""; o[c.key + "Img"] = null; });
+    CONDS.forEach(c => { o[c.key] = ""; o[c.key + "Imgs"] = []; });
     return o;
   }
   function normalizeCondition(data){
@@ -862,7 +865,10 @@
     if (!data || typeof data !== "object") return normalized;
     CONDS.forEach(c => {
       if (typeof data[c.key] === "string") normalized[c.key] = data[c.key];
-      if (typeof data[c.key + "Img"] === "string") normalized[c.key + "Img"] = data[c.key + "Img"];
+      const images = Array.isArray(data[c.key + "Imgs"])
+        ? data[c.key + "Imgs"].filter(image => typeof image === "string")
+        : (typeof data[c.key + "Img"] === "string" ? [data[c.key + "Img"]] : []);
+      normalized[c.key + "Imgs"] = images;
     });
     return normalized;
   }
@@ -884,20 +890,26 @@
 
   function condRowHTML(devId, phase, condKey, condLabel, data){
     const val = data[condKey] || "";
-    const img = data[condKey + "Img"];
+    const images = data[condKey + "Imgs"] || [];
     return `
       <div class="cond-row" data-dev="${devId}" data-phase="${phase}" data-cond="${condKey}">
         <label class="field-label">${condLabel}</label>
         <input type="text" data-role="cond-text" value="${esc(val)}" placeholder="-">
         <div class="photo-row">
-          ${img ? `<img class="thumb" src="${img}">` : `<div class="thumb-placeholder">Belum ada foto</div>`}
+          <div class="photo-gallery">
+            ${images.length ? images.map((image, index) => `
+              <div class="photo-item">
+                <img class="thumb" src="${image}" alt="Evidence ${esc(condLabel)} ${index + 1}">
+                <button type="button" class="photo-remove" data-role="cond-remove-img" data-index="${index}" aria-label="Hapus foto ${index + 1}" title="Hapus foto">×</button>
+              </div>
+            `).join("") : `<div class="thumb-placeholder">Belum ada foto</div>`}
+          </div>
           <div class="btn btn-sm file-btn"><span class="media-icon" aria-hidden="true">📷️</span> Kamera
             <input type="file" accept="image/*" capture="environment" data-role="cond-file">
           </div>
-          <div class="btn btn-sm file-btn"><span class="media-icon" aria-hidden="true">🖼️</span> Galeri
-            <input type="file" accept="image/*,.heic,.heif,image/heic,image/heif" data-role="cond-file">
+          <div class="btn btn-sm file-btn"><span class="media-icon" aria-hidden="true">🖼️</span> Tambah foto
+            <input type="file" accept="image/*,.heic,.heif,image/heic,image/heif" data-role="cond-file" multiple>
           </div>
-          ${img ? `<button type="button" class="btn btn-sm btn-danger" data-role="cond-remove-img">Hapus</button>` : ``}
         </div>
       </div>
     `;
@@ -959,27 +971,31 @@
     if (role === "dev-remove") removeDevice(devEl.dataset.dev);
     if (role === "cond-remove-img") {
       const condEl = e.target.closest("[data-cond]");
-      d[condEl.dataset.phase][condEl.dataset.cond + "Img"] = null;
+      const images = d[condEl.dataset.phase][condEl.dataset.cond + "Imgs"];
+      images.splice(Number(e.target.dataset.index), 1);
       renderDevices();
     }
   });
 
   deviceListEl.addEventListener("change", async (e) => {
     if (e.target.dataset.role !== "cond-file") return;
-    const file = e.target.files[0];
-    if (!file) return;
+    const files = Array.from(e.target.files || []);
+    if (!files.length) return;
     const devEl = e.target.closest("[data-dev]");
     const condEl = e.target.closest("[data-cond]");
     const d = devices.find(x => x.id === devEl.dataset.dev);
     if (!d || !condEl) return;
-    try {
-      const imageData = await readImageFile(file);
-      d[condEl.dataset.phase][condEl.dataset.cond + "Img"] = imageData;
-      renderDevices();
-    } catch (error) {
-      alert(error.message || "Foto tidak dapat dimuat. Pilih file gambar lain.");
-      e.target.value = "";
+    const images = d[condEl.dataset.phase][condEl.dataset.cond + "Imgs"];
+    const errors = [];
+    for (const file of files) {
+      try {
+        images.push(await readImageFile(file));
+      } catch (error) {
+        errors.push(`${file.name}: ${error.message || "Foto tidak dapat dimuat."}`);
+      }
     }
+    renderDevices();
+    if (errors.length) alert(errors.join("\n"));
   });
 
   document.getElementById("addDeviceBtn").addEventListener("click", () => addDevice());
@@ -1239,8 +1255,9 @@
 
     const conditionCell = (phase, condition) => {
       const value = phase[condition.key] || "-";
-      const image = phase[condition.key + "Img"];
-      return `<td><span class="condition-label">${esc(condition.label)}:</span><span class="condition-value">${esc(value)}</span>${image ? `<img class="condition-photo" src="${image}" alt="${esc(condition.label)}">` : ""}</td>`;
+      const images = phase[condition.key + "Imgs"] || [];
+      const photos = images.map((image, index) => `<img class="condition-photo" src="${image}" alt="${esc(condition.label)} ${index + 1}">`).join("");
+      return `<td><span class="condition-label">${esc(condition.label)}:</span><span class="condition-value">${esc(value)}</span>${photos}</td>`;
     };
 
     const deviceHTML = devices.length ? devices.map((d, i) => `
